@@ -1,0 +1,368 @@
+name: mangabackupconverter
+description: An opinionated template for a Flutter project.
+
+publish_to: none
+
+version: 0.1.0
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.29.0 <4.0.0"
+
+workspace:
+  - packages/*
+
+dependencies:
+  accessibility_tools: ^2.5.0
+  aidoku_plugin_loader:
+    path: packages/aidoku_plugin_loader
+  assets:
+    path: packages/assets
+  scraper:
+    path: packages/scraper
+  swiftsoup:
+    path: packages/swiftsoup
+  quickjs:
+    git:
+      url: https://github.com/BooleanExtra/quickjs-dart
+  wasm3:
+    path: packages/wasm3
+  awesome_flutter_extensions: ^1.2.0
+  collection: ^1.18.0
+  connectivity_plus: ^7.0.0
+  constants:
+    path: packages/constants
+  cupertino_icons: ^1.0.6
+  dart_mappable: ^4.1.0
+  flex_color_picker: ^3.7.1
+  flex_color_scheme: ^8.1.1
+  flutter:
+    sdk: flutter
+  flutter_adaptive_scaffold: ^0.3.3
+  flutter_flavor: ^3.1.1
+  flutter_hooks: ^0.21.2
+  flutter_native_splash: ^2.4.0
+  flutter_settings_ui: ^3.0.1
+  flutter_web_plugins:
+    sdk: flutter
+  fpdart: ^1.1.0
+  freezed_annotation: ^3.0.0
+  go_router: ^17.1.0
+  google_fonts: ^6.2.1
+  hooks_riverpod: ^3.0.0
+  http: ^1.4.0
+  logging: ^1.2.0
+  package_info_plus: ^8.0.2
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  riverpod: ^3.0.0
+  riverpod_annotation: ^3.0.0
+  shared_preferences: ^2.3.3
+  skeletonizer: ^2.1.3
+  super_clipboard: ^0.9.1
+  universal_html: ^2.2.4
+  url_launcher: ^6.2.6
+  window_manager: ^0.5.1
+  wolt_modal_sheet: ^0.11.0
+
+dependency_overrides:
+  propertylistserialization:
+    git:
+      url: https://github.com/getBoolean/dart-propertylistserialization.git
+      ref: fix/webCompatibility
+
+dev_dependencies:
+  app_lints:
+    path: packages/app_lints
+  build_runner: any
+  build_verify: ^3.1.0
+  change_app_package_name: ^1.1.0
+  custom_lint: ^0.8.0
+  dart_mappable_builder: ^4.2.3
+  flutter_launcher_icons: ^0.14.3
+  flutter_test:
+    sdk: flutter
+  freezed: ^3.0.0
+  integration_test:
+    sdk: flutter
+  mason: ^0.1.0-dev.52
+  melos: ^7.4.0
+  mocktail: ^1.0.3
+  msix: ^3.16.7
+  patrol: ^4.1.1
+  riverpod_generator: ^3.0.0
+  riverpod_lint: ^3.0.0
+  sqflite_common_ffi_web: ^0.4.3+1
+
+flutter:
+  uses-material-design: true
+
+msix_config:
+  display_name: Flutter Template App
+  install_certificate: false
+
+patrol:
+  app_name: Manga Backup Converter
+  android:
+    package_name: dev.getboolean.mangabackupconverter
+  ios:
+    bundle_id: dev.getboolean.mangabackupconverter
+
+melos:
+  sdkPath: auto
+  command:
+    bootstrap:
+      # It seems so that running "pub get" in parallel has some issues (like
+      # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
+      # makes the CI much more stable.
+      # runPubGetInParallel: false
+      hooks:
+        # Activate the coverage package globally so that it can be used in the
+        # `test` command.
+        post: flutter pub global activate coverage ^1.11.1
+
+  # See https://github.com/firebase/flutterfire/blob/master/melos.yaml for more examples
+  scripts:
+    # Custom lint is only applied to the packages and not the root app because of a dependency conflict with `integration_test` and `melos`
+    pub:
+      run: melos run dart:pkg --no-select && melos run flutter:pkg --no-select
+      description: Run `dart pub get` in all packages.
+
+    dart:pkg:
+      run: dart pub get
+      exec:
+        failFast: true
+        # concurrency: 1
+      description: Run `dart pub get` in the selected package.
+      packageFilters:
+        noDependsOn: flutter
+
+    flutter:pkg:
+      run: flutter pub get
+      exec:
+        failFast: true
+        # concurrency: 1
+      description: Run `flutter pub get` in the selected package.
+      packageFilters:
+        dependsOn: flutter
+
+    lint:
+      run: melos run analyze && melos run custom_lint
+      description: Run `melos run analyze` and `melos run custom_lint` in all packages.
+
+    # which use different versions of `path`.
+    analyze:
+      run: melos run analyze:pkg --no-select
+      description: Run `dart analyze` in all packages.
+
+    analyze:pkg:
+      run: dart analyze --fatal-infos lib
+      exec:
+        failFast: true
+        # concurrency: 1
+      description: Run `dart analyze` on all packages.
+
+    custom_lint:
+      run: melos run custom_lint:pkg --no-select
+      description: Run `dart run custom_lint` in all packages with custom lints.
+
+    custom_lint:pkg:
+      run: dart run custom_lint
+      exec:
+        failFast: true
+        # concurrency: 1
+      description: Run `dart run custom_lint` in the selected package.
+      packageFilters:
+        dependsOn: custom_lint
+
+    upgrade:
+      run: |
+        dart pub upgrade
+        melos run upgrade:pkg --no-select
+      description: Run `dart pub upgrade` in all packages.
+
+    upgrade:pkg:
+      run: dart pub upgrade
+      exec:
+        failFast: true
+      description: Run `dart pub upgrade` in the selected package.
+
+    upgrade-major:
+      run: |
+        dart pub upgrade
+        melos run upgrade:pkg --no-select
+      description: Run `dart pub upgrade --major-versions` in all packages.
+
+    upgrade-major:pkg:
+      run: dart pub upgrade --major-versions
+      exec:
+        failFast: true
+      description: Run `dart pub upgrade --major-versions` in the selected package.
+
+    format:
+      exec: dart format .
+      description: Run `dart format` in all packages.
+
+    fix:
+      exec: dart fix --apply
+      description: Run `dart fix --apply` in all packages.
+
+    verify_format:
+      run: dart format --output=none --set-exit-if-changed .
+      exec:
+        failFast: true
+      description: Verify formatting was applied.
+
+    generate:
+      run: melos run assets && melos run generate:pkg --no-select && melos run format
+      description: Run `build_runner build` in all packages.
+
+    generate:pkg:
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        # concurrency: 5
+        failFast: true
+      description: Run `build_runner build` in the selected packages.
+      packageFilters:
+        dependsOn: build_runner
+
+    watch:pkg:
+      run: dart run build_runner watch --delete-conflicting-outputs
+      exec:
+        # concurrency: 1
+        failFast: true
+      description: Run `build_runner watch` in the selected package. If all is selected, the command will only run in the first package.
+      packageFilters:
+        dependsOn: build_runner
+
+    assets:
+      run: melos run assets:pkg --no-select
+      description: Run `flutter pub run fluttergen pubspec.yaml` all packages with assets gen.
+
+    assets:pkg:
+      run: flutter pub run fluttergen pubspec.yaml
+      exec:
+        failFast: true
+      description: Run `flutter pub run fluttergen pubspec.yaml` in the selected package.
+      packageFilters:
+        dependsOn: flutter_gen
+
+    dart_test:pkg:
+      run: dart pub global run coverage:test_with_coverage
+      exec:
+        failFast: true
+        concurrency: 1
+      description: Run Dart tests for a specific package in this project.
+      packageFilters:
+        dirExists: test
+        dependsOn: test
+        noDependsOn: flutter jni
+        ignore:
+          - web_wasm_runner
+          - swiftsoup
+          - jsoup_jni
+
+    flutter_test:pkg:
+      run: flutter test --no-pub --coverage
+      exec:
+        failFast: true
+        # concurrency: 1
+      description: Run Flutter tests for a specific package in this project.
+      packageFilters:
+        flutter: true
+        dirExists: test
+        dependsOn: flutter_test
+        noDependsOn: jni
+
+    test:
+      run: melos run flutter_test && melos run dart_test
+      description: Run all tests in this project.
+
+    flutter_test:
+      run: melos run flutter_test:pkg --no-select
+      description: Run all Flutter tests in this project.
+
+    cli:
+      run: dart run packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart
+      description: Run the CLI directly (faster than `dart run mangabackupconverter_cli:mangabackupconverter_cli`).
+
+    jnigen:
+      exec: dart run tool/generate_jni_bindings.dart
+      description: Generate JNI bindings for jsoup (prepends bundled JRE to PATH).
+      packageFilters:
+        scope: jsoup_jni
+
+    jni_setup:
+      exec: dart run tool/generate_jni_bindings.dart --jni-setup
+      description: Build dartjni.dll via jni:setup with auto-discovered system JDK.
+      packageFilters:
+        scope: jsoup_jni
+
+    dart_test:
+      run: melos run dart_test:pkg --no-select
+      description: Run all Dart tests in this project.
+
+    dart_test_no_coverage:pkg:
+      run: dart test --reporter expanded
+      exec:
+        failFast: true
+        concurrency: 1
+      description: Run Dart tests without coverage (for Windows/macOS CI).
+      packageFilters:
+        dirExists: test
+        dependsOn: test
+        noDependsOn: flutter jni
+        ignore:
+          - web_wasm_runner
+          - swiftsoup
+          - jsoup_jni
+
+    dart_test_no_coverage:
+      run: melos run dart_test_no_coverage:pkg --no-select
+      description: Run all Dart tests without coverage.
+
+    flutter_web_test:pkg:
+      run: flutter test --platform chrome
+      exec:
+        failFast: true
+        concurrency: 1
+      description: Run Flutter web tests for a specific package in this project.
+      packageFilters:
+        flutter: true
+        dirExists: test
+        dependsOn: flutter_test
+        noDependsOn: jni
+
+    dart_web_test:pkg:
+      run: dart test --reporter expanded --platform chrome
+      exec:
+        failFast: true
+        concurrency: 1
+      description: Run Dart web tests for a specific package in this project.
+      packageFilters:
+        dirExists: test
+        dependsOn: test
+        noDependsOn: flutter jni
+        ignore:
+          - swiftsoup
+          - jsoup_jni
+          - wasmer_runner
+          - wasm3
+          - scraper
+          - jsoup
+          - app_lints
+          - assets
+          - constants
+          - wasm_runner
+
+    web_test:
+      run: melos run flutter_web_test && melos run dart_web_test
+      description: Run all web-compatible tests in Chrome.
+
+    flutter_web_test:
+      run: melos run flutter_web_test:pkg --no-select
+      description: Run all Flutter web tests in this project.
+
+    dart_web_test:
+      run: melos run dart_web_test:pkg --no-select
+      description: Run all Dart web tests in this project.

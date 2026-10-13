@@ -1,0 +1,40 @@
+name: assets
+description: A new Flutter package project.
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.27.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  fpdart: ^1.1.0
+  hooks_riverpod: ^3.0.0
+
+dev_dependencies:
+  app_lints:
+    path: ../app_lints
+  build_runner: ^2.4.0
+  flutter_gen_runner: ^5.12.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  # Must specify full path to each asset, directories will not work
+  # since this is in a package. All assets must also be in the lib directory.
+  #
+  # Run the generator with `melos run assets`
+  assets:
+    - lib/images/flutter_logo.png
+
+flutter_gen:
+  output: lib/gen/
+  line_length: 80
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: false
+      style: camel-case

@@ -1,0 +1,27 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Generated files
+**/*.g.dart linguist-generated=true
+**/*.mapper.dart linguist-generated=true
+**/*.modddel.dart linguist-generated=true
+**/*.iconfig.dart linguist-generated=true
+**/i18n.dart linguist-generated=true
+lib/generated/intl/messages*.dart linguist-generated=true
+**/*.chopper.dart linguist-generated=true
+**/*.swagger.dart linguist-generated=true
+**/client_mapping.dart linguist-generated=true
+**/*.auto_mappr.dart linguist-generated=true
+**/*.lock linguist-generated=true
+**/*.resolved linguist-generated=true
+**/*.freezed.dart linguist-generated=true
+**/*.pb.dart linguist-generated=true
+**/*.pbenum.dart linguist-generated=true
+**/*.pbjson.dart linguist-generated=true
+**/*.pbserver.dart linguist-generated=true
+**/*.init.dart linguist-generated=true
+**/*.gen.dart linguist-generated=true
+**/*_bindings_generated.dart linguist-generated=true
+**/bindings/org/jsoup/**/*.dart linguist-generated=true
+packages/jsoup/lib/src/web/teavm_bundle.dart linguist-generated=true
+packages/swiftsoup/swift/SwiftSoupBridge.h linguist-generated=true

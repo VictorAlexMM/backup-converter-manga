@@ -1,0 +1,172 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "debug mode",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "profile mode",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "release mode",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "Import Paperback (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/Paperback Archive.pas4",
+                "--output-format",
+                "tachi",
+                "--tachi-fork",
+                "mihon",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Aidoku (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/aidoku.aib",
+                "--output-format",
+                "tachi",
+                "--tachi-fork",
+                "mihon",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Tachimanga (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/Tachimanga_backup.tmb",
+                "--output-format",
+                "tachi",
+                "--tachi-fork",
+                "mihon",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Mangayomi (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/mangayomi.backup",
+                "--output-format",
+                "tachi",
+                "--tachi-fork",
+                "mihon",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Mihon (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/app.mihon.tachibk",
+                "--tachi-fork",
+                "mihon",
+                "--output-format",
+                "aidoku",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import J2K (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/eu.kanade.tachiyomi.j2k.tachibk",
+                "--tachi-fork",
+                "j2k",
+                "--output-format",
+                "aidoku",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Yokai (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/eu.kanade.tachiyomi.yokai.tachibk",
+                "--tachi-fork",
+                "yokai",
+                "--output-format",
+                "aidoku",
+                "-v"
+            ]
+        },
+        {
+            "name": "Import Neko (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "convert",
+                "-b",
+                ".input_files/neko.tachibk",
+                "--tachi-fork",
+                "neko",
+                "--output-format",
+                "aidoku",
+                "-v"
+            ]
+        },
+        {
+            "name": "Merge Aidoku Backups (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/mangabackupconverter_cli/bin/mangabackupconverter_cli.dart",
+            "args": [
+                "merge",
+                "-f",
+                ".input_files/aidoku_2026-02-15_16-54-23.aib",
+                "-m",
+                ".input_files/aidoku_2026-02-17_22-37-22.aib",
+                "-o",
+                ".output_files/",
+                "-v"
+            ]
+        }
+    ]
+}
