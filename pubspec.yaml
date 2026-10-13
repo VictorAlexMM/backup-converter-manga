@@ -13,7 +13,7 @@ workspace:
   - packages/*
 
 dependencies:
-  accessibility_tools: ^2.5.0
+  accessibility_tools: ^3.0.0
   aidoku_plugin_loader:
     path: packages/aidoku_plugin_loader
   assets:
